@@ -1,0 +1,20 @@
+#instructions {
+  background-color: #075e54;
+  min-height: 100vh;
+  background-size: cover;
+}
+body {
+  background-color: #075e54;
+}
+/* video {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+} */
+#title {
+  font-size: 3rem;
+  text-shadow: 3px 3px 3px black;
+}
