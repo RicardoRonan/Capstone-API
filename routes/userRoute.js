@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Gets one users
+// Gets one user
 router.get("/:id", middleware, (req, res) => {
   try {
     con.query(
@@ -64,21 +64,19 @@ router.delete("/:id", (req, res) => {
   }
 });
 
-router.get;
+// router.get;
 
 // Register Route and Add new user
 // The Route where Encryption starts
 router.post("/register", (req, res) => {
   try {
     let sql = "INSERT INTO users SET ?";
-    const { user_id, user_name, img, bio, email, password, user_type } =
-      req.body;
+    const { user_name, img, bio, email, password, user_type } = req.body;
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
     let user = {
-      user_id,
       user_name,
       img,
       bio,
@@ -109,7 +107,6 @@ router.post("/login", (req, res) => {
     con.query(sql, user, async (err, result) => {
       if (err) throw err;
       if (result.length === 0) {
-        // res.send({ msg: "Email not found please register" });
         res.status(400).json({
           status: "error",
           error: "Email not found",
@@ -165,5 +162,19 @@ router.post("/login", (req, res) => {
         res.send(decodedToken);
       }
     });
-  }),
-  (module.exports = router);
+  });
+// router.get("/singleuser/:id", (req, res) => {
+//   try {
+//     con.query(
+//       `SELECT user_id FROM users INNER JOIN posts ON users.user_id = posts.user_id WHERE users.user_id`,
+//       (err, result) => {
+//         if (err) throw err;
+//         res.send(result);
+//       }
+//     );
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).send(error);
+//   }
+// })
+module.exports = router;
