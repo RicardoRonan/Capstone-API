@@ -163,18 +163,27 @@ router.post("/login", (req, res) => {
       }
     });
   });
-// router.get("/singleuser/:id", (req, res) => {
-//   try {
-//     con.query(
-//       `SELECT user_id FROM users INNER JOIN posts ON users.user_id = posts.user_id WHERE users.user_id`,
-//       (err, result) => {
-//         if (err) throw err;
-//         res.send(result);
-//       }
-//     );
-//   } catch (error) {
-//     console.log(error);
-//     res.status(400).send(error);
-//   }
-// })
+
+router.get("/:id/post", (req, res) => {
+  try {
+    const strq = `SELECT * 
+    FROM users u 
+    INNER JOIN posts p
+    ON u.user_id = p.user_id
+    WHERE u.user_id = ?`
+
+    con.query(
+      strq,
+      [req.params.id],
+      (err, result) => {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
+  } catch (error) {
+    // console.log(error);
+    // res.status(400).send(error);
+    throw error;
+  }
+});
 module.exports = router;
