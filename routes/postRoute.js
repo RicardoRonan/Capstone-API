@@ -33,7 +33,7 @@ router.get("/:id", (req, res) => {
   }
 });
 // Add post
-router.post("/", middleware, (req, res) => {
+router.post("/", (req, res) => {
   console.log("added new post successfully");
   const { post_id, user_id, image_title, caption, image, category } = req.body;
   try {
@@ -49,7 +49,7 @@ router.post("/", middleware, (req, res) => {
   }
 });
 // edit post
-router.put("/:id", middleware, (req, res) => {
+router.put("/:id", (req, res) => {
   console.log(req.body.category);
   const { user_id, image_title, caption, image, category } = req.body;
   try {
@@ -66,7 +66,7 @@ router.put("/:id", middleware, (req, res) => {
   console.log("updated post successfully");
 });
 // delete posts
-router.delete("/:id", middleware, (req, res) => {
+router.delete("/:id", (req, res) => {
   console.log("deleted post successfully");
   try {
     con.query(
