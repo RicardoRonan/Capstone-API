@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 });
 
 // Gets one user
-router.get("/:id", middleware, (req, res) => {
+router.get("/:id", (req, res) => {
   try {
     con.query(
       `SELECT * FROM users where user_id =${req.params.id} `,
@@ -170,16 +170,12 @@ router.get("/:id/post", (req, res) => {
     FROM users u 
     INNER JOIN posts p
     ON u.user_id = p.user_id
-    WHERE u.user_id = ?`
+    WHERE u.user_id = ?`;
 
-    con.query(
-      strq,
-      [req.params.id],
-      (err, result) => {
-        if (err) throw err;
-        res.send(result);
-      }
-    );
+    con.query(strq, [req.params.id], (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    });
   } catch (error) {
     // console.log(error);
     // res.status(400).send(error);

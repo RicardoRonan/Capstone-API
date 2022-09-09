@@ -35,7 +35,7 @@ router.get("/:id", (req, res) => {
 // Add post
 router.post("/", (req, res) => {
   console.log("added new post successfully");
-  const { post_id, user_id, image_title, caption, image, category } = req.body;
+  const { user_id, image_title, caption, image, category } = req.body;
   try {
     con.query(
       `INSERT into posts (user_id,image_title,caption,image,category) values ( '${user_id}' ,'${image_title}', '${caption}' , '${image}','${category}')`,
